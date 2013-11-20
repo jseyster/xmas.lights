@@ -36,14 +36,6 @@ function enableLight(light) {
     }
 }
 
-function toggleLight(light) {
-    console.log(light);
-    if (light.enabled)
-	disableLight(light);
-    else
-	enableLight(light);
-}
-
 function lightStateBitField() {
     var bitfield = 0;
     for (var i = lightArray.length - 1; i >= 0; i--) {
@@ -61,16 +53,26 @@ server.listen(8080);
 
 app.use(express.static(__dirname + '/public'));
 
+function updateClients(socket) {
+    var bitfield = lightStateBitField();
+    socket.emit('server update', bitfield);
+    socket.broadcast.emit('server update', bitfield);
+}
+
 io.sockets.on('connection', function(socket) {
     socket.emit('server update', lightStateBitField());
 
-    socket.on('light toggle', function(data) {
+    socket.on('light enable', function(data) {
 	if (data >= 0 && data < lightArray.length) {
-	    toggleLight(lightArray[data]);
+	    enableLight(lightArray[data]);
+	    updateClients(socket);
+	}
+    });
 
-            var bitfield = lightStateBitField();
-            socket.emit('server update', bitfield);
-	    socket.broadcast.emit('server update', bitfield);
+    socket.on('light disable', function(data) {
+	if (data >= 0 && data < lightArray.length) {
+	    disableLight(lightArray[data]);
+	    updateClients(socket);
 	}
     });
 });

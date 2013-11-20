@@ -52,13 +52,20 @@
         showLightStatus();
       });
 
+      function toggleLight(index) {
+        if (lightArray[index].enabled)
+          socket.emit('light disable', index);
+        else
+          socket.emit('light enable', index);
+      }
+
       function clicked(index) {
-        socket.emit('light toggle', index);
+        toggleLight(index);
       }
 
       function keyPressHandler(event) {
         var index = keyMap[String.fromCharCode(event.charCode).toLowerCase()];
-        socket.emit('light toggle', index);
+        toggleLight(index);
       }
       document.onkeypress = keyPressHandler;
     </script>
