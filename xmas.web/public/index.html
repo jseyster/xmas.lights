@@ -21,6 +21,17 @@
         new Light("Red")
       ];
 
+      var keyMap = {
+        "q": 0,
+        "w": 1,
+        "e": 2,
+        "r": 3,
+        "t": 4,
+        "y": 5,
+        "u": 6,
+        "i": 7
+      };
+
       function setLightStateFromBitField(bitfield) {
         for (var i = 0; i < lightArray.length; i++) {
           lightArray[i].enabled = bitfield & 1;
@@ -37,7 +48,6 @@
 
       var socket = io.connect('http://localhost:8080');
       socket.on('server update', function(data) {
-        console.log('Update: ' + data);
 	setLightStateFromBitField(data);
         showLightStatus();
       });
@@ -45,17 +55,23 @@
       function clicked(index) {
         socket.emit('light toggle', index);
       }
+
+      function keyPressHandler(event) {
+        var index = keyMap[String.fromCharCode(event.charCode).toLowerCase()];
+        socket.emit('light toggle', index);
+      }
+      document.onkeypress = keyPressHandler;
     </script>
     <h1>xmas.js</h1>
     <div>
-      <div id="toggle0" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(0)"></div>
-      <div id="toggle1" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(1)"></div>
-      <div id="toggle2" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(2)"></div>
-      <div id="toggle3" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(3)"></div>
-      <div id="toggle4" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(4)"></div>
-      <div id="toggle5" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(5)"></div>
-      <div id="toggle6" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(6)"></div>
-      <div id="toggle7" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(7)"></div>
+      <div id="toggle0" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(0)"></div>
+      <div id="toggle1" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(1)"></div>
+      <div id="toggle2" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(2)"></div>
+      <div id="toggle3" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(3)"></div>
+      <div id="toggle4" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(4)"></div>
+      <div id="toggle5" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(5)"></div>
+      <div id="toggle6" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(6)"></div>
+      <div id="toggle7" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(7)"></div>
     </div>
   </body>
 </html>
