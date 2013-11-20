@@ -12,18 +12,24 @@
 
       var lightArray = [
         new Light("Red"),
-        new Light("Green")
+        new Light("Orange"),
+        new Light("Yellow"),
+        new Light("Green"),
+        new Light("Blue"),
+        new Light("Indigo"),
+        new Light("Violet"),
+        new Light("Red")
       ];
 
       function setLightStateFromBitField(bitfield) {
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < lightArray.length; i++) {
           lightArray[i].enabled = bitfield & 1;
           bitfield >>= 1;
         }
       }
 
       function showLightStatus() {
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < lightArray.length; i++) {
           var element = document.getElementById('toggle' + i);
           element.style.background = lightArray[i].enabled ? lightArray[i].color : "Gray";
         }
@@ -37,13 +43,6 @@
       });
 
       function clicked(index) {
-        //var light = lightArray[index];
-        //light.enabled = !light.enabled;
-        //var color = light.enabled ? light.color : "Gray";
-
-        //var element = document.getElementById("toggle" + index);
-        //element.style.background = color;
-
         socket.emit('light toggle', index);
       }
     </script>
@@ -51,6 +50,12 @@
     <div>
       <div id="toggle0" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(0)"></div>
       <div id="toggle1" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(1)"></div>
+      <div id="toggle2" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(2)"></div>
+      <div id="toggle3" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(3)"></div>
+      <div id="toggle4" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(4)"></div>
+      <div id="toggle5" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(5)"></div>
+      <div id="toggle6" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(6)"></div>
+      <div id="toggle7" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(7)"></div>
     </div>
   </body>
 </html>
