@@ -1,0 +1,56 @@
+<html>
+  <head><title>xmas.web</title></head>
+  <body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      "use strict";
+
+      function Light(color) {
+        this.enabled = false;
+        this.color = color;
+      }
+
+      var lightArray = [
+        new Light("Red"),
+        new Light("Green")
+      ];
+
+      function setLightStateFromBitField(bitfield) {
+        for (var i = 0; i < 2; i++) {
+          lightArray[i].enabled = bitfield & 1;
+          bitfield >>= 1;
+        }
+      }
+
+      function showLightStatus() {
+        for (var i = 0; i < 2; i++) {
+          var element = document.getElementById('toggle' + i);
+          element.style.background = lightArray[i].enabled ? lightArray[i].color : "Gray";
+        }
+      }
+
+      var socket = io.connect('http://localhost:8080');
+      socket.on('server update', function(data) {
+        console.log('Update: ' + data);
+	setLightStateFromBitField(data);
+        showLightStatus();
+      });
+
+      function clicked(index) {
+        //var light = lightArray[index];
+        //light.enabled = !light.enabled;
+        //var color = light.enabled ? light.color : "Gray";
+
+        //var element = document.getElementById("toggle" + index);
+        //element.style.background = color;
+
+        socket.emit('light toggle', index);
+      }
+    </script>
+    <h1>xmas.js</h1>
+    <div>
+      <div id="toggle0" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(0)"></div>
+      <div id="toggle1" style="width:200px; height:200px; background:gray; float: left" onclick="clicked(1)"></div>
+    </div>
+  </body>
+</html>
