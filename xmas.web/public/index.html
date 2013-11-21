@@ -46,7 +46,8 @@
         }
       }
 
-      var socket = io.connect('http://localhost:8080');
+      var serverName = 'http://' + location.host
+      var socket = io.connect(serverName);
       socket.on('server update', function(data) {
 	setLightStateFromBitField(data);
         showLightStatus();
