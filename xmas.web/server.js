@@ -11,6 +11,11 @@ var sequence = require('./sequence.json');
  * light from turning on and off many times a second. */
 var LIGHT_ON_DELAY = 500;
 
+/* After IDLE_TIMEOUT milliseconds with no commands sent to the
+ * server, we enter a default idle sequence so that people have
+ * lights to watch! */
+var IDLE_TIMEOUT = 30000
+
 var lastCommandTime = new Date();
 var inIdle = false;
 
@@ -92,7 +97,7 @@ io.sockets.on('connection', function(socket) {
      * sequence. */
     function idleCheck() {
 	var timeNow = new Date();
-	if (!inIdle && lastCommandTime.getTime() + 5000 < timeNow.getTime())
+	if (!inIdle && lastCommandTime.getTime() + IDLE_TIMEOUT < timeNow.getTime())
 	    doSequence(sequence.events, socket);
     }
     setInterval(idleCheck, 1000);
