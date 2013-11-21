@@ -64,7 +64,8 @@ function lightStateBitField() {
 var app = express();
 var server = http.createServer(app);
 var io = socketio.listen(server);
-server.listen(8080);
+var port = process.env.PORT || 8080;
+server.listen(port);
 
 app.use(express.static(__dirname + '/public'));
 
