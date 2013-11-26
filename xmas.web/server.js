@@ -94,6 +94,12 @@ io.sockets.on('connection', function(socket) {
 	}
     });
 
+    socket.on('disable all', function(data) {
+	disableAll();
+	updateClients(socket);
+	lastCommandTime = new Date();
+    });
+
     /* If we go too long without activity, begin a default
      * sequence. */
     function idleCheck() {

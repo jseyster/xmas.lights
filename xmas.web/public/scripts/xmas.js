@@ -65,6 +65,10 @@ function toggleLight(index) {
         socket.emit('light enable', index);
 }
 
+function disableAll() {
+    socket.emit('disable all');
+}
+
 /* Set up all the dots below the buttons so that they're colors match
  * the button colors. */
 function setDotColors() {
