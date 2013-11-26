@@ -1,85 +1,179 @@
-<html>
-  <head><title>xmas.web</title></head>
-  <body>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      "use strict";
+<!doctype html>
 
-      function Light(color) {
-        this.enabled = false;
-        this.color = color;
-      }
+<!--
+This document is based on a layout provided Pure library, The original
+license is reproduced here:
 
-      var lightArray = [
-        new Light("Red"),
-        new Light("Orange"),
-        new Light("Yellow"),
-        new Light("Green"),
-        new Light("Blue"),
-        new Light("Indigo"),
-        new Light("Violet"),
-        new Light("Red")
-      ];
+Software License Agreement (BSD License)
+========================================
 
-      var keyMap = {
-        "q": 0,
-        "w": 1,
-        "e": 2,
-        "r": 3,
-        "t": 4,
-        "y": 5,
-        "u": 6,
-        "i": 7
-      };
+Copyright 2013 Yahoo! Inc. All rights reserved.
 
-      function setLightStateFromBitField(bitfield) {
-        for (var i = 0; i < lightArray.length; i++) {
-          lightArray[i].enabled = bitfield & 1;
-          bitfield >>= 1;
-        }
-      }
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-      function showLightStatus() {
-        for (var i = 0; i < lightArray.length; i++) {
-          var element = document.getElementById('toggle' + i);
-          element.style.background = lightArray[i].enabled ? lightArray[i].color : "Gray";
-        }
-      }
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
 
-      var serverName = 'http://' + location.host
-      var socket = io.connect(serverName);
-      socket.on('server update', function(data) {
-	setLightStateFromBitField(data);
-        showLightStatus();
-      });
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
 
-      function toggleLight(index) {
-        if (lightArray[index].enabled)
-          socket.emit('light disable', index);
-        else
-          socket.emit('light enable', index);
-      }
+    * Neither the name of the Yahoo! Inc. nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
 
-      function clicked(index) {
-        toggleLight(index);
-      }
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL YAHOO! INC. BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
 
-      function keyPressHandler(event) {
-        var index = keyMap[String.fromCharCode(event.charCode).toLowerCase()];
-        toggleLight(index);
-      }
-      document.onkeypress = keyPressHandler;
-    </script>
-    <h1>xmas.js</h1>
-    <div>
-      <div id="toggle0" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(0)"></div>
-      <div id="toggle1" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(1)"></div>
-      <div id="toggle2" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(2)"></div>
-      <div id="toggle3" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(3)"></div>
-      <div id="toggle4" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(4)"></div>
-      <div id="toggle5" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(5)"></div>
-      <div id="toggle6" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(6)"></div>
-      <div id="toggle7" style="width:150px; height:150px; background:gray; float: left" onclick="clicked(7)"></div>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A layout example that shows off a responsive product landing page.">
+
+  <title>Xmas.web</title>
+
+  <!--link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css"-->
+  <link rel="stylesheet" href="css/base-min.css">
+  <link rel="stylesheet" href="css/buttons-min.css">
+  <link rel="stylesheet" href="css/grids.css">
+  <link rel="stylesheet" href="css/menus-min.css">
+  <link rel="stylesheet" href="css/xmas.css">
+
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="scripts/xmas.js"></script>
+
+  <style>
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="header">
+      <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
+        <a class="pure-menu-heading" href="">xmas.web</a>
+
+        <ul>
+          <!--<li class="pure-menu-selected"><a href="#">Home</a></li>-->
+          <li><a href="https://twitter.com/jrseys">@jrseys</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="https://github.com/jseyster/xmas.lights/">GitHub</a></li>
+        </ul>
+      </div>
     </div>
-  </body>
+
+    <div id="lights-banner" class="splash parallax-splash">
+      <div class="pure-g-r">
+	<div class="pure-u-1-2" style="text-align: center;">
+<!-- Begin Ustream embed code -->
+<iframe width="480" height="392" src="http://www.ustream.tv/embed/16553179?v=3&amp;wmode=direct" scrolling="no" frameborder="0" style="border: 0px none transparent;">    </iframe>
+<br /><a href="http://www.ustream.tv/" style="padding: 2px 0px 4px; width: 400px; background: #ffffff; display: inline-block; color: #000000; font-weight: normal; font-size: 10px; text-decoration: underline; text-align: center;" target="_blank">Live streaming video by Ustream</a>
+<!-- End Ustream embed code -->
+	</div>
+	<div class="pure-u-1-2">
+	  <div class="splash-box">
+            <h1 class="splash-head" style="text-align: right">
+              Control my Christmas lights
+            </h1>
+
+	    <div class="light-button-container">
+	      <a href="#" id="toggle0" class="pure-button light-button light-button-wide" onclick="clicked(0); return false;">qwerty</a>
+	      <div class="wide-light-color-dot-container"><div id="color0" class="wide-light-color-dot"></div></div>
+
+	      <a href="#" id="toggle1" class="pure-button light-button light-button-1-6" onclick="clicked(1); return false;">a</a>
+	      <a href="#" id="toggle2" class="pure-button light-button light-button-1-6" onclick="clicked(2); return false;">s</a>
+	      <a href="#" id="toggle3" class="pure-button light-button light-button-1-6" onclick="clicked(3); return false;">d</a>
+	      <a href="#" id="toggle4" class="pure-button light-button light-button-1-6" onclick="clicked(4); return false;">f</a>
+	      <a href="#" id="toggle5" class="pure-button light-button light-button-1-6" onclick="clicked(5); return false;">g</a>
+	      <a href="#" id="toggle6" class="pure-button light-button light-button-1-6" onclick="clicked(6); return false;">h</a>
+
+	      <div class="light-color-dot-container"><div id="color1" class="light-color-dot"></div></div>
+	      <div class="light-color-dot-container"><div id="color2" class="light-color-dot"></div></div>
+	      <div class="light-color-dot-container"><div id="color3" class="light-color-dot"></div></div>
+	      <div class="light-color-dot-container"><div id="color4" class="light-color-dot"></div></div>
+	      <div class="light-color-dot-container"><div id="color5" class="light-color-dot"></div></div>
+	      <div class="light-color-dot-container"><div id="color6" class="light-color-dot"></div></div>
+
+	      <a href="#" id="toggle7" class="pure-button light-button light-button-wide" onclick="clicked(7); return false;">[Space]</a>
+	      <div class="wide-light-color-dot-container"><div id="color7" class="wide-light-color-dot"></div></div>
+
+	      <div class="clear-button-container"><a href="#" class="pure-button">Clear all</a></div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+    </div>
+
+    <div class="content">
+      <div class="pure-g-r content-ribbon">
+        <div class="pure-u-2-3">
+          <div class="l-box">
+            <h4 class="content-subhead">How it works</h4>
+	    <p>
+	      The embedded stream shows a view of my balcony, which is
+	      festively decorated with Christmas lights that you will
+	      be controlling.  The balcony faces El Camino Real, a
+	      busy road, so give everybody a good show.
+	    </p>
+	    <ul>
+	      <li>Click the buttons above or use your keyboard to
+	      toggle the strands on and off.</li>
+	      <li>If other users are playing with the lights, you can
+	      see their changes in real time.  Don't let that stop you
+	      from joining in.</li>
+	      <li>If nobody touches the lights for more than thirty
+	      seconds, they start doing their own thing.  That's your
+	      cue to come up with something more creative than what
+	      I've programmed.</li>
+	      <li>Each strand is rate limited, so you can't strobe any
+	      one strand super fast.  Let's not give anybody a
+	      seizure.  (The rate limit is enforced on the server, but
+	      nice try.)</li>
+	    </ul>
+          </div>
+        </div>
+
+        <div class="pure-u-1-3">
+          <div class="l-box">
+            <img src="images/relay-breadboard.jpg"
+                 alt="Raspberry Pi and breadboard"><br />
+	    The relays array are controlled by a Raspberry Pi.
+          </div>
+        </div>
+      </div>
+
+
+      <div class="l-box ribbon">
+<!-- Begin big chunk from Twitter -->
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://xmas.seyster.org" data-via="jrseys" data-count="none" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<!-- End big chunk from Twitter -->
+
+<!-- Begin chunk taken from https://github.com/mdo/github-buttons -->
+<iframe src="http://ghbtns.com/github-btn.html?user=jseyster&repo=xmas.lights&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
+<!-- End chunk -->
+
+      </div>
+    </div>
+
+    <div class="footer">
+      "Fairy Lights" photo by <a class="link"
+      href="http://www.flickr.com/photos/chrisjones">Chris Jones</a>.
+      Layout adapted from <a class="link"
+      href="http://purecss.io">Pure</a>.
+    </div>
+  </div>
+
+  <!--script src="http://yui.yahooapis.com/3.12.0/build/yui/yui.js"></script-->
+</body>
 </html>

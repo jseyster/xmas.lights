@@ -1,0 +1,214 @@
+/* This document is based on a layout provided Pure library, The original
+license is reproduced here:
+
+Software License Agreement (BSD License)
+========================================
+
+Copyright 2013 Yahoo! Inc. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+    * Neither the name of the Yahoo! Inc. nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL YAHOO! INC. BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    line-height: 1.7em;
+}
+
+.l-box {
+    padding: 1em;
+}
+
+.header {
+    margin: 0 0;
+}
+
+    .header .pure-menu {
+        padding: 0.5em;
+    }
+
+        .header .pure-menu li a:hover,
+        .header .pure-menu li a:focus {
+            background: none;
+            border: none;
+            color: #aaa;
+        }
+
+body .primary-button {
+    background: #02a6eb;
+    color: #fff;
+}
+
+.splash {
+    margin: 2em auto 0;
+    padding: 3em 0.5em;
+    background: #eee;
+}
+    .splash .splash-head {
+        font-size: 300%;
+        margin: 0em 0;
+        line-height: 1.2em;
+    }
+    .splash .splash-subhead {
+        color: #999;
+        font-weight: 300;
+        line-height: 1.4em;
+    }
+    .splash .primary-button {
+        font-size: 150%;
+    }
+
+
+.content .content-subhead {
+    color: #999;
+    padding-bottom: 0.3em;
+    text-transform: uppercase;
+    margin: 0;
+    border-bottom: 2px solid #eee;
+    display: inline-block;
+}
+
+.content .content-ribbon {
+    margin: 3em;
+    border-bottom: 1px solid #eee;
+}
+
+.ribbon {
+    background: #eee;
+    text-align: center;
+    padding: 2em;
+    color: #999;
+}
+    .ribbon h2 {
+        display: inline;
+        font-weight: normal;
+    }
+
+.footer {
+    background: #111;
+    color: #666;
+    text-align: center;
+    padding: 1em;
+    font-size: 80%;
+}
+
+a.link {
+    text-decoration: none;
+    color: rgb(142, 142, 214);
+}
+a.link:hover,
+a.link:focus {
+    text-decoration: underline;
+}
+
+.parallax-splash {
+    background: url('/images/lights.jpg') 0 0 no-repeat fixed;
+    background-size: cover;
+    width: 100%
+}
+
+.light-button-container {
+    width: 100%;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+}
+
+.light-button {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.light-button-wide {
+    color: gray;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.light-button-1-6 {
+    width: 15.5%;
+    margin-top: 1em;
+
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+
+.light-color-dot-container {
+    width: 15.5%;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+
+    text-align: center;
+}
+
+.light-color-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+
+    background: gray;
+}
+
+.wide-light-color-dot-container {
+    width: 100%;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+
+    text-align: center;
+}
+
+.wide-light-color-dot {
+    width: 50px;
+    height: 10px;
+    border-radius: 5px; 
+
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+
+    background: gray;
+}
+
+.clear-button-container {
+    text-align: right;
+}
+
+.splash-box {
+    background: rgba(200, 200, 200, 0.8);
+    padding: 1em;
+    border-radius: 8px;
+}
