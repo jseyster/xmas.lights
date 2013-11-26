@@ -44,6 +44,12 @@ function showLightStatus() {
     for (var i = 0; i < lightArray.length; i++) {
         var element = document.getElementById('toggle' + i);
         element.style.background = lightArray[i].enabled ? lightArray[i].color : disabledColor;
+
+	// Make sure we don't end up with white text on a white background.
+	if (lightArray[i].enabled && lightArray[i].color == 'White')
+	    element.style.color = 'Gray';
+	else
+	    element.style.color = 'White';
     }
 }
 
