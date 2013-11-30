@@ -53,13 +53,6 @@ function showLightStatus() {
     }
 }
 
-var serverName = 'http://' + location.host
-var socket = io.connect(serverName);
-socket.on('server update', function(data) {
-    setLightStateFromBitField(data);
-    showLightStatus();
-});
-
 function clicked(index) {
     toggleLight(index);
 }
@@ -84,6 +77,12 @@ function setDotColors() {
     }
 }
 
+function hideLightControls() {
+    var controls = document.getElementById('light-controls');
+    controls.innerHTML = '<h1 class="splash-head">Sorry, the lights are not available right now</h1>' +
+	'<p>Usually, you can control them in the evenings, from 8:00p.m. to 10:00p.m Pacific time.</p>';
+}
+
 window.onload = function() {
     setDotColors();
 
@@ -98,5 +97,26 @@ window.onload = function() {
 	var index = keyMap[String.fromCharCode(event.charCode).toLowerCase()];
 	toggleLight(index);
     }
+
+    var serverName = 'http://' + location.host
+    var socket = io.connect(serverName, { 'connect timeout': 5000});
+    socket.on('server update', function(data) {
+	setLightStateFromBitField(data);
+	showLightStatus();
+    });
+
+    socket.on('connect', function() {
+	socket.on('disconnect', function() {
+	    hideLightControls();
+	});
+    });
+
+    socket.on('connect_failed', function() {
+	hideLightControls();
+    });
+
+    socket.on('error', function() {
+	hideLightControls();
+    });
 }
 
