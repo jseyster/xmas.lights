@@ -76,39 +76,44 @@ function updateClients(socket) {
 }
 
 io.sockets.on('connection', function(socket) {
-    socket.emit('server update', lightStateBitField());
+    if (typeof(process.env.DISABLE_SOCKET) === 'undefined') {
+	socket.emit('server update', lightStateBitField());
 
-    socket.on('light enable', function(data) {
-	if (data >= 0 && data < lightArray.length) {
-	    enableLight(lightArray[data]);
+	socket.on('light enable', function(data) {
+	    if (data >= 0 && data < lightArray.length) {
+		enableLight(lightArray[data]);
+		updateClients(socket);
+		lastCommandTime = new Date();
+	    }
+	});
+
+	socket.on('light disable', function(data) {
+	    if (data >= 0 && data < lightArray.length) {
+		disableLight(lightArray[data]);
+		updateClients(socket);
+		lastCommandTime = new Date();
+	    }
+	});
+
+	socket.on('disable all', function(data) {
+	    disableAll();
 	    updateClients(socket);
 	    lastCommandTime = new Date();
+	});
+
+	/* If we go too long without activity, begin a default
+	 * sequence. */
+	var idleCheck = function() {
+	    var timeNow = new Date();
+	    if (!inIdle && lastCommandTime.getTime() + IDLE_TIMEOUT < timeNow.getTime())
+		doSequence(sequence.events, socket);
 	}
-    });
-
-    socket.on('light disable', function(data) {
-	if (data >= 0 && data < lightArray.length) {
-	    disableLight(lightArray[data]);
-	    updateClients(socket);
-	    lastCommandTime = new Date();
-	}
-    });
-
-    socket.on('disable all', function(data) {
-	disableAll();
-	updateClients(socket);
-	lastCommandTime = new Date();
-    });
-
-    /* If we go too long without activity, begin a default
-     * sequence. */
-    function idleCheck() {
-	var timeNow = new Date();
-	if (!inIdle && lastCommandTime.getTime() + IDLE_TIMEOUT < timeNow.getTime())
-	    doSequence(sequence.events, socket);
+	setInterval(idleCheck, 1000);
     }
-    setInterval(idleCheck, 1000);
-
+    else {
+	/* The socket is disabled.  Tell the client to go take a long walk. */
+	socket.disconnect();
+    }
 });
 
 function doSequence(events, socket) {
