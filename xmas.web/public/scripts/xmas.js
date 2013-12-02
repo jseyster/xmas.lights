@@ -9,9 +9,9 @@ function Light(color) {
 
 var lightArray = [
     new Light("White"),
+    new Light("rgb(66, 184, 221)"),
     new Light("rgb(28, 184, 65)"),
     new Light("rgb(202, 60, 60)"),
-    new Light("rgb(223, 117, 20)"),
     new Light("rgb(66, 184, 221)"),
     new Light("rgb(28, 184, 65)"),
     new Light("rgb(202, 60, 60)"),
