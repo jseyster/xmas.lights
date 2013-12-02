@@ -1,5 +1,7 @@
 "use strict";
 
+var socket;
+
 function Light(color) {
     this.enabled = false;
     this.color = color;
@@ -93,13 +95,8 @@ window.onload = function() {
             banner.style.backgroundPosition = '0px ' + (-parallaxSpeed * window.pageYOffset) + 'px';
     }
 
-    document.onkeypress = function(event) {
-	var index = keyMap[String.fromCharCode(event.charCode).toLowerCase()];
-	toggleLight(index);
-    }
-
     var serverName = 'http://' + location.host
-    var socket = io.connect(serverName, { 'connect timeout': 5000});
+    socket = io.connect(serverName, { 'connect timeout': 5000});
     socket.on('server update', function(data) {
 	setLightStateFromBitField(data);
 	showLightStatus();
@@ -118,5 +115,10 @@ window.onload = function() {
     socket.on('error', function() {
 	hideLightControls();
     });
+
+    document.onkeypress = function(event) {
+	var index = keyMap[String.fromCharCode(event.charCode).toLowerCase()];
+	toggleLight(index);
+    }
 }
 
