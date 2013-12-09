@@ -18,6 +18,7 @@ var numSteps = 32;
 
 var currentDotColor = 'Orange';
 var disabledColor = 'Gray';
+var whiteColor = 'rgb(238, 238, 255)';
 
 var sequencer;
 
@@ -46,7 +47,16 @@ Sequencer.prototype.updateControls = function(switch_i, seq_i) {
 
 	var id = 'seq-element-' + switch_i + '-' + seq_i;
 	var seqElement = document.getElementById(id);
-	seqElement.style.background = enabled ? this.lights[switch_i].color : 'gray';
+	var color;
+	if (enabled) {
+	    color = this.lights[switch_i].color;
+	    if (color === 'White')  // Replace white with off-white to avoid white-on-white display
+		color = whiteColor;
+	}
+	else {
+	    color = disabledColor;
+	}
+	seqElement.style.background = color;
     }
 };
 
