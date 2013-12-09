@@ -212,3 +212,90 @@ a.link:focus {
     padding: 1em;
     border-radius: 8px;
 }
+
+.seq-color-dot-container {
+    float: left;
+
+    text-align: center;
+    width: 20px;
+    height: 1.5em;
+
+    padding: 0;
+    margin: 0;
+}
+
+.seq-row-container {
+    overflow:hidden;
+
+    height: 1.5em;
+
+    padding: 0;
+    margin: 0;
+}
+
+.sequencer-element {
+    width: 3.125%;
+    height: 1.5em;
+
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+
+    background: gray;
+}
+
+.left-element {
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.right-element {
+    border-radius: 0 0.5em 0.5em 0;
+}
+
+.top-left-element {
+    border-radius: 0.5em 0 0 0;
+}
+
+.top-right-element {
+    border-radius: 0 0.5em 0 0;
+}
+
+.bottom-left-element {
+    border-radius: 0 0 0 0.5em;
+}
+
+.bottom-right-element {
+    border-radius: 0 0 0.5em 0;
+}
+
+.seq-dot-container {
+    width: 3.125%;
+    height: 1.5em;
+
+    text-align: center;
+
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+
+.seq-timing-dot {
+    width: 10px;
+    height: 10px;
+
+    background: gray;
+
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}

@@ -50,6 +50,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <link rel="stylesheet" href="css/xmas.css">
 
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="scripts/sequencer.js"></script>
   <script type="text/javascript" src="scripts/xmas.js"></script>
 
   <style>
@@ -114,6 +115,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </div>
 
     <div class="content">
+      <div id="sequencer-container" class="l-box">
+	<h4 class="content-subhead">Sequencer</h4>
+      </div>
+      <div class="l-box clear-button-container">
+	<a href="#" class="pure-button" onclick="clearPatternButton(); return false;">Clear pattern</a>
+	<a href="#" id="play-button" class="pure-button pure-button-primary" style="width: 5em;" onclick="playButton(); return false;">&#x25b6;</a>
+      </div>
+
       <div class="pure-g-r content-ribbon">
         <div class="pure-u-2-3">
           <div class="l-box">

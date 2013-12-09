@@ -66,6 +66,10 @@ function toggleLight(index) {
         socket.emit('light enable', index);
 }
 
+function setLight(index, val) {
+    socket.emit(val ? 'light enable' : 'light disable', index);
+}
+
 function disableAll() {
     socket.emit('disable all');
 }
@@ -75,6 +79,9 @@ function disableAll() {
 function setDotColors() {
     for (var i = 0; i < lightArray.length; i++) {
 	var dot = document.getElementById('color' + i);
+	dot.style.background = lightArray[i].color;
+
+	dot = document.getElementById('seq-color' + i);
 	dot.style.background = lightArray[i].color;
     }
 }
@@ -86,6 +93,8 @@ function hideLightControls() {
 }
 
 window.onload = function() {
+    writeSequencer(document.getElementById('sequencer-container'), lightArray);
+
     setDotColors();
 
     var banner = document.getElementById('lights-banner');
