@@ -40,7 +40,7 @@ function disableLight(light) {
 
 function enableLight(light) {
     var now = new Date();
-    if (now.getTime() >= light.lastLit + 2000) {
+    if (now.getTime() >= light.lastLit + LIGHT_ON_DELAY) {
 	light.enabled = true;
 	light.lastLit = now.getTime();
     }
