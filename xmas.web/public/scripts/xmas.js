@@ -110,7 +110,10 @@ function setDotColors() {
 	dot.style.background = lightArray[i].color;
 
 	dot = document.getElementById('seq-color' + i);
-	dot.style.background = lightArray[i].color;
+	var dotColor = lightArray[i].color;
+	if (dotColor === 'White')
+	    dotColor = 'rgb(238, 238, 255)';  // This is the off-white color used in sequencer.js
+	dot.style.background = dotColor;
     }
 }
 
