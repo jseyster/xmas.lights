@@ -117,7 +117,7 @@ function setDotColors() {
 function hideLightControls() {
     var controls = document.getElementById('light-controls');
     controls.innerHTML = '<h1 class="splash-head">Sorry, the lights are not available right now</h1>' +
-	'<p>Usually, you can control them in the evenings, from 8:00p.m. to 10:00p.m Pacific time.</p>';
+	'<p>Usually, you can control them in the evenings, from 7:00p.m. to 1:00a.m. Pacific time.</p>';
 }
 
 window.onload = function() {
